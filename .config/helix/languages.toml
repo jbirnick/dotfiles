@@ -1,0 +1,5 @@
+[language-server.typst-lsp.config]
+exportPdf = "onSave"
+
+[language-server.rust-analyzer.config]
+check.command = "clippy"

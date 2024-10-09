@@ -1,0 +1,286 @@
+#!/bin/sh
+
+# See the river(1), riverctl(1), and rivertile(1) man pages for complete documentation.
+
+# Super+Return to start an instance of foot (https://codeberg.org/dnkl/foot)
+riverctl map normal Super Return spawn foot
+
+# Super+Space to open desktop launcher
+riverctl map normal Super Space spawn j4-dmenu-desktop
+
+# Super+Shift+Space to open command launcher
+riverctl map normal Super+Shift Space spawn dmenu_run
+
+# Super+V for clipmenud
+riverctl map normal Super V spawn "cliphist list | sed 's/\t/ /' | dmenu --nofuzz -l 10 | sed 's/ /\t/' | cliphist decode | wl-copy"
+
+# Super+P for calculator
+riverctl map normal Super P spawn 'dmenu --calc'
+
+# Super+Q to add Todoist task
+riverctl map normal Super T spawn 'echo '' | dmenu -p "New task:" | .scripts/new_todoist_task.sh'
+
+# Super+O to dismiss notification
+riverctl map normal Super O spawn "fnottctl dismiss"
+
+# Super+{1,2,3} sets brightness
+riverctl map normal Super 1 spawn "brightnessctl set 1"
+riverctl map normal Super 2 spawn "brightnessctl set 30%"
+riverctl map normal Super 3 spawn "brightnessctl set 100%"
+
+# Super+C to close the focused view
+riverctl map normal Super C close
+
+# Super+Alt+E to exit river
+riverctl map normal Super+Alt E exit
+
+# Super+J and Super+K to focus the next/previous view in the layout stack
+riverctl map normal Super J focus-view next
+riverctl map normal Super K focus-view previous
+
+# Super+Shift+J and Super+Shift+K to swap the focused view with the next/previous
+# view in the layout stack
+riverctl map normal Super+Shift J swap next
+riverctl map normal Super+Shift K swap previous
+
+# Super+Period and Super+Comma to focus the next/previous output
+riverctl map normal Super Period focus-output next
+riverctl map normal Super Comma focus-output previous
+
+# Super+Shift+{Period,Comma} to send the focused view to the next/previous output
+riverctl map normal Super+Shift Period send-to-output next
+riverctl map normal Super+Shift Comma send-to-output previous
+
+# Super+Tab to bump the focused view to the top of the layout stack
+riverctl map normal Super Tab zoom
+
+# Super+H and Super+L to decrease/increase the main ratio of rivertile(1)
+riverctl map normal Super H send-layout-cmd rivertile "main-ratio -0.02"
+riverctl map normal Super L send-layout-cmd rivertile "main-ratio +0.02"
+
+# Super+Shift+H and Super+Shift+L to increment/decrement the main count of rivertile(1)
+riverctl map normal Super+Shift H send-layout-cmd rivertile "main-count +1"
+riverctl map normal Super+Shift L send-layout-cmd rivertile "main-count -1"
+
+# Super+Alt+{H,J,K,L} to move views
+riverctl map normal Super+Alt H move left 100
+riverctl map normal Super+Alt J move down 100
+riverctl map normal Super+Alt K move up 100
+riverctl map normal Super+Alt L move right 100
+
+# Super+Alt+Control+{H,J,K,L} to snap views to screen edges
+riverctl map normal Super+Alt+Control H snap left
+riverctl map normal Super+Alt+Control J snap down
+riverctl map normal Super+Alt+Control K snap up
+riverctl map normal Super+Alt+Control L snap right
+
+# Super+Alt+Shift+{H,J,K,L} to resize views
+riverctl map normal Super+Alt+Shift H resize horizontal -100
+riverctl map normal Super+Alt+Shift J resize vertical 100
+riverctl map normal Super+Alt+Shift K resize vertical -100
+riverctl map normal Super+Alt+Shift L resize horizontal 100
+
+# Super + Left Mouse Button to move views
+riverctl map-pointer normal Super BTN_LEFT move-view
+
+# Super + Right Mouse Button to resize views
+riverctl map-pointer normal Super BTN_RIGHT resize-view
+
+# Super + Middle Mouse Button to toggle float
+riverctl map-pointer normal Super BTN_MIDDLE toggle-float
+
+key=S
+tag=$((1 << 0))
+# Super+$key to focus $tag
+riverctl map normal Super $key set-focused-tags $tag
+# Super+Shift+$key to tag focused view with tag $tag and view this tag
+riverctl map normal Super+Shift $key spawn "riverctl set-view-tags $tag && riverctl set-focused-tags $tag"
+# Super+Ctrl+$key to toggle focus of tag $tag
+riverctl map normal Super+Control $key toggle-focused-tags $tag
+# Super+Shift+Ctrl+$key to toggle tag $tag of focused view
+riverctl map normal Super+Shift+Control $key toggle-view-tags $tag
+
+key=D
+tag=$((1 << 1))
+# Super+$key to focus $tag
+riverctl map normal Super $key set-focused-tags $tag
+# Super+Shift+$key to tag focused view with tag $tag
+riverctl map normal Super+Shift $key spawn "riverctl set-view-tags $tag && riverctl set-focused-tags $tag"
+# Super+Ctrl+$key to toggle focus of tag $tag
+riverctl map normal Super+Control $key toggle-focused-tags $tag
+# Super+Shift+Ctrl+$key to toggle tag $tag of focused view
+riverctl map normal Super+Shift+Control $key toggle-view-tags $tag
+
+key=F
+tag=$((1 << 2))
+# Super+$key to focus $tag
+riverctl map normal Super $key set-focused-tags $tag
+# Super+Shift+$key to tag focused view with tag $tag
+riverctl map normal Super+Shift $key spawn "riverctl set-view-tags $tag && riverctl set-focused-tags $tag"
+# Super+Ctrl+$key to toggle focus of tag $tag
+riverctl map normal Super+Control $key toggle-focused-tags $tag
+# Super+Shift+Ctrl+$key to toggle tag $tag of focused view
+riverctl map normal Super+Shift+Control $key toggle-view-tags $tag
+
+key=W
+tag=$((1 << 3))
+# Super+$key to focus $tag
+riverctl map normal Super $key set-focused-tags $tag
+# Super+Shift+$key to tag focused view with tag $tag
+riverctl map normal Super+Shift $key spawn "riverctl set-view-tags $tag && riverctl set-focused-tags $tag"
+# Super+Ctrl+$key to toggle focus of tag $tag
+riverctl map normal Super+Control $key toggle-focused-tags $tag
+# Super+Shift+Ctrl+$key to toggle tag $tag of focused view
+riverctl map normal Super+Shift+Control $key toggle-view-tags $tag
+
+key=E
+tag=$((1 << 4))
+# Super+$key to focus $tag
+riverctl map normal Super $key set-focused-tags $tag
+# Super+Shift+$key to tag focused view with tag $tag
+riverctl map normal Super+Shift $key spawn "riverctl set-view-tags $tag && riverctl set-focused-tags $tag"
+# Super+Ctrl+$key to toggle focus of tag $tag
+riverctl map normal Super+Control $key toggle-focused-tags $tag
+# Super+Shift+Ctrl+$key to toggle tag $tag of focused view
+riverctl map normal Super+Shift+Control $key toggle-view-tags $tag
+
+key=R
+tag=$((1 << 5))
+# Super+$key to focus $tag
+riverctl map normal Super $key set-focused-tags $tag
+# Super+Shift+$key to tag focused view with tag $tag
+riverctl map normal Super+Shift $key spawn "riverctl set-view-tags $tag && riverctl set-focused-tags $tag"
+# Super+Ctrl+$key to toggle focus of tag $tag
+riverctl map normal Super+Control $key toggle-focused-tags $tag
+# Super+Shift+Ctrl+$key to toggle tag $tag of focused view
+riverctl map normal Super+Shift+Control $key toggle-view-tags $tag
+
+
+# Super+0 to focus all tags
+# Super+Shift+0 to tag focused view with all tags
+all_tags=$(((1 << 32) - 1))
+riverctl map normal Super 0 set-focused-tags $all_tags
+riverctl map normal Super+Shift 0 set-view-tags $all_tags
+
+# setup scratchpad
+scratch_tag=$((1 << 20))
+riverctl map normal Super A toggle-focused-tags $scratch_tag
+riverctl map normal Super+Shift A set-view-tags $scratch_tag
+all_but_scratch_tag=$(( ((1 << 32) - 1) ^ $scratch_tag ))
+riverctl spawn-tagmask $all_but_scratch_tag
+
+# Super+Q to toggle float
+riverctl map normal Super Q toggle-float
+
+# Super+I to toggle fullscreen
+riverctl map normal Super I toggle-fullscreen
+
+# Super+{Up,Right,Down,Left} to change layout orientation
+riverctl map normal Super Up    send-layout-cmd rivertile "main-location top"
+riverctl map normal Super Right send-layout-cmd rivertile "main-location right"
+riverctl map normal Super Down  send-layout-cmd rivertile "main-location bottom"
+riverctl map normal Super Left  send-layout-cmd rivertile "main-location left"
+
+# Declare a passthrough mode. This mode has only a single mapping to return to
+# normal mode. This makes it useful for testing a nested wayland compositor
+riverctl declare-mode passthrough
+
+# Super+F11 to enter passthrough mode
+riverctl map normal Super F11 enter-mode passthrough
+
+# Super+F11 to return to normal mode
+riverctl map passthrough Super F11 enter-mode normal
+
+# Alt+{H,J,K,L} for arrow keys
+riverctl map normal Alt H spawn "wtype -k left"
+riverctl map normal Alt J spawn "wtype -k down"
+riverctl map normal Alt K spawn "wtype -k up"
+riverctl map normal Alt L spawn "wtype -k right"
+
+# Various media key mapping examples for both normal and locked mode which do
+# not have a modifier
+for mode in normal locked
+do
+    # Eject the optical drive (well if you still have one that is)
+    riverctl map $mode None XF86Eject spawn 'eject -T'
+
+    # Control pulse audio volume with pamixer (https://github.com/cdemoulins/pamixer)
+    riverctl map $mode None XF86AudioRaiseVolume  spawn 'pamixer -i 5'
+    riverctl map $mode None XF86AudioLowerVolume  spawn 'pamixer -d 5'
+    riverctl map $mode None XF86AudioMute         spawn 'pamixer --toggle-mute'
+
+    # Control MPRIS aware media players with playerctl (https://github.com/altdesktop/playerctl)
+    riverctl map $mode None XF86AudioMedia spawn 'playerctl play-pause'
+    riverctl map $mode None XF86AudioPlay  spawn 'playerctl play-pause'
+    riverctl map $mode None XF86AudioPrev  spawn 'playerctl previous'
+    riverctl map $mode None XF86AudioNext  spawn 'playerctl next'
+
+    # Control screen backlight brightness
+    riverctl map $mode None XF86MonBrightnessUp   spawn 'brightnessctl set 5%+'
+    riverctl map $mode None XF86MonBrightnessDown spawn 'brightnessctl set 5%-'
+done
+
+# Screenshot shortcut
+riverctl map normal None Print spawn "slurp | grim -g - - | wl-copy"
+
+# Set background
+riverctl background-color 0x002b36
+
+# Set border
+#riverctl border-color-focused 0xffdd00
+riverctl border-color-focused 0xffee82
+riverctl border-color-unfocused 0x333333
+riverctl border-color-urgent 0xff0000
+riverctl border-width 2
+
+# Set keyboard repeat rate
+riverctl set-repeat 50 300
+
+# Make certain views start floating
+riverctl rule-add -app-id float float
+riverctl rule-add -app-id org.kde.dolphin float
+
+# setup input
+riverctl input pointer-1267-12811-ELAN0688:00_04F3:320B_Touchpad natural-scroll enabled
+riverctl input pointer-1267-12811-ELAN0688:00_04F3:320B_Touchpad drag enabled
+riverctl input pointer-1267-12811-ELAN0688:00_04F3:320B_Touchpad tap enabled
+riverctl input pointer-1267-12811-ELAN0688:00_04F3:320B_Touchpad click-method clickfinger
+riverctl input pointer-1267-12811-ELAN0688:00_04F3:320B_Touchpad accel-profile adaptive
+
+riverctl input pointer-9610-4103-SINOWEALTH_Game_Mouse accel-profile flat
+riverctl input pointer-9610-4103-SINOWEALTH_Game_Mouse pointer-accel -0.3
+
+riverctl input pointer-1133-45089-Logitech_Pebble_Mouse accel-profile flat
+riverctl input pointer-1133-45089-Logitech_Pebble_Mouse pointer-accel -0.1
+
+# set keyboard layout
+riverctl keyboard-layout -variant 'altgr-intl' us
+
+# server-side rendering
+riverctl rule-add ssd
+
+# startup applications
+dbus-update-activation-environment --all
+gnome-keyring-daemon --start --components=secrets &
+killall -q wbg
+wbg ~/Wallpapers/switzerland1.jpg &
+killall -q nm-applet
+nm-applet &
+killall -q pasystray
+pasystray &
+killall -q blueman-applet
+blueman-applet &
+killall -q waybar
+waybar &
+killall -q dunst
+dunst &
+killall -q wl-paste
+wl-paste --type text --watch cliphist store &
+wl-paste --type image --watch cliphist store &
+killall polkit-kde-authentication-agent-1
+/usr/lib/polkit-kde-authentication-agent-1 &
+
+# Set the default layout generator to be rivertile and start it.
+# River will send the process group of the init executable SIGTERM on exit.
+riverctl default-layout rivertile
+rivertile -view-padding 2 -outer-padding 2 &

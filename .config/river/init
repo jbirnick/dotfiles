@@ -21,7 +21,10 @@ riverctl map normal Super P spawn 'dmenu --calc'
 riverctl map normal Super T spawn 'echo '' | dmenu -p "New task:" | .scripts/new_todoist_task.sh'
 
 # Super+O to dismiss notification
-riverctl map normal Super O spawn "fnottctl dismiss"
+#riverctl map normal Super O spawn "fnottctl dismiss"
+
+# Super+O to open file from /Document/Sync/
+riverctl map normal Super O spawn "~/.scripts/open_file_from_sync_dir.sh"
 
 # Super+{1,2,3} sets brightness
 riverctl map normal Super 1 spawn "brightnessctl set 1"

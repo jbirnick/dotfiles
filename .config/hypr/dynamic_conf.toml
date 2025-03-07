@@ -1,0 +1,5 @@
+default = "workspaces_mobile.conf"
+
+[monitors]
+DP-7 = "workspaces_docked.conf"
+DP-9 = "workspaces_docked.conf"
